@@ -28,7 +28,7 @@ char    *ft_strrev(char *str)
 
 int main(void)
 {
-    char *str = "rani";
+    char str[] = "rani";
 
     printf("%s", ft_strrev(str));
 }
