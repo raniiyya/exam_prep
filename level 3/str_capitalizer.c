@@ -14,11 +14,10 @@ int main(int ac, char *av[])
 		i = 0;
 		while (av[j][i] == ' ' && av[j][i] == '\t') 
 			i++;
-		if (av[j][0] >= 'a' && av[j][0] <= 'z') {
+		if (av[j][0] >= 'a' && av[j][0] <= 'z')
 			av[j][i] -= 32;
-			write(1, &av[j][0], 1);
-			i++;
-		}
+		write(1, &av[j][0], 1);
+		i++;
 		while (av[j][i]) {
 			if (av[j][i] >= 'A' && av[j][i] <= 'Z')
 				av[j][i] += 32;
