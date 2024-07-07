@@ -27,11 +27,7 @@ int		main(int ac, char *av[])
 	int i = 2; //our first prime num, iterator
 	int sum = 0;
 
-	if (ac != 2) {
-		write(1, "0\n", 2);
-		return 0;
-	}
-	if (mini_atoi(av[1]) < 2) {
+	if (ac != 2 || mini_atoi(av[1]) < 2) {
 		write(1, "0\n", 2);
 		return 0;
 	}
@@ -39,7 +35,7 @@ int		main(int ac, char *av[])
 		int j = 2; //for the division
 		int prime = 1;
 
-		while (j <= i / 2) { //a number is not divisible by any number greater than half of it
+		while (j < i) { //a number is not divisible by any number greater than half of it
 			if (i % j == 0) { //if modulo % j is equal to 0 (net ostatka) -> it's not a prime num
 				prime = 0;
 				break;
