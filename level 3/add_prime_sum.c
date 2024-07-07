@@ -41,9 +41,8 @@ int		main(int ac, char *av[])
 			}
 			j++;
 		}
-		if (prime == 1) {
+		if (prime == 1)
 			sum += i;
-		}
 		i++;
 	}
 	mini_putnbr(sum);
