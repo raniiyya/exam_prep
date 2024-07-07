@@ -31,12 +31,11 @@ int		main(int ac, char *av[])
 		write(1, "0\n", 2);
 		return 0;
 	}
-	while (i <= mini_atoi(av[1])) {
+	while (i <= mini_atoi(av[1])) { //looping over all nums from 2 to the given number
 		int j = 2; //for the division
 		int prime = 1;
-
-		while (j < i) { //a number is not divisible by any number greater than half of it
-			if (i % j == 0) { //if modulo % j is equal to 0 (net ostatka) -> it's not a prime num
+		while (j < i) { //because modulo of the same num = 0
+			if (i % j == 0) { //if i % j is equal to 0 (net ostatka) -> it's not a prime num
 				prime = 0;
 				break;
 			}
