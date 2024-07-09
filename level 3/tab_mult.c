@@ -30,8 +30,10 @@ int main(int ac, char *av[])
     int i = 1;
     int nb = mini_atoi(av[1]);
 
-    if (ac == 1)
+    if (ac == 1) {
+        write(1, "\n", 1);
         return 0;
+    }
     while (i <= 9) {
         mini_putnbr(i);
         write(1, " x ", 3);
