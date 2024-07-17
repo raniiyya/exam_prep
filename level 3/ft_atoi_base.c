@@ -17,22 +17,22 @@ int     ft_atoi_base(const char *str, int str_base)
         sign = -1;
     }
     while (*str) {
-        char upperchar = to_upper(*str);
-        printf("%c", upperchar);
+        char c = to_upper(*str);
+
         if (str_base > 10) {
-            if (!((upperchar >= '0' && upperchar <= '9') 
-            || (upperchar >= 'A' && upperchar <= (str_base - 10 + 'A') ))) {
-                break;
+            if (!((c >= '0' && c <= '9') 
+            || (c >= 'A' && c <= (str_base - 10 + 'A') ))) {
+                break;                   
             }
         }
-        if (upperchar >= '0' && upperchar <= '9')
+        if (c >= '0' && c <= '9')
             result = result * str_base + *str - '0';
-        if (upperchar >= 'A' && upperchar <= 'F')
-            result = result * str_base + upperchar - 'A' + 10;
+        if (c >= 'A' && c <= 'F')
+            result = result * str_base + c - 'A' + 10; // or -55
         str++;
     }
     return result * sign;
 }
 int main() {
-    printf("%d", ft_atoi_base("abc", 16));
+    printf("%d", ft_atoi_base("abcdef", 16));
 }
