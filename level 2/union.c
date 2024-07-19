@@ -19,11 +19,8 @@ int main(int ac, char **av) {
                 k++;
             }
             if (is_double == 0) {
-                int l = 0; //for storing the chars that are not in doubles to assign av to it and print it
-                while (chars[l])
-                    l++;
-                chars[l] = av[i][j];
                 write(1, &av[i][j], 1);
+                chars[k] = av[i][j]; //storing the chars that we printed
             }
             j++;
         }
