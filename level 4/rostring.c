@@ -1,44 +1,47 @@
 #include <unistd.h>
-#include <stdlib.h>
 
 int	main(int ac, char **av) {
-	if (ac < 2)
-		return 0; 
-
-	char *word; //to save the first word
-	char *str; //for the rest of the string
 	int i = 0;
+	int j = 0;
+	char s1[256] = {0};
+	char s2[256] = {0};
 
-	while (av[1][i] == ' ' || av[1][i] == '\t') 
-        i++;
-	word = malloc(1024); //max char size a string can have
-	if (!word)
-        return 0;
-	while (av[1][i] && av[1][i] != ' ' && av[1][i] != '\t') {
-		word[i] = av[1][i];
-		i++;
+	if (ac < 2) {
+		write(1, "\n", 1);
+		return 0;
 	}
-	word[i] = '\0';
 	while (av[1][i] == ' ' || av[1][i] == '\t')
-        i++;
-	str = av[1] + i; // str = &av[1][i] to point to the second word (that will be the first)
-	i = 0;
-	while (str[i]) {
-		if (str[i] == ' ' || str[i] == '\t') {
-			while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	while (av[1][i] != ' ' && av[1][i] != '\t') {
+		s1[j] = av[1][i];
+		i++;
+		j++;
+	}
+	while (av[1][i] == ' ' || av[1][i] == '\t')
+		i++;
+	j = 0;
+	while (av[1][i]) {
+		if (av[1][i] == ' ' || av[1][i] == '\t') {
+			s2[j] = av[1][i];
+			j++;
+			while (av[1][i] == ' ' || av[1][i] == '\t')
 				i++;
-			write(1, " ", 1);
 		}
-		write(1, &str[i], 1);
+		s2[j] = av[1][i];
 		i++;
+		j++;
 	}
-	write(1, " ", 1);
 	i = 0;
-	while (word[i]) {
-		write(1, &word[i], 1);
+	while (s2[i]) {
+		write(1, &s2[i], 1);
 		i++;
 	}
-	return 0;
+	if (i > 0 && s2[i - 1] != ' ')
+		write(1, " ", 1);
+	i = 0;
+	while (s1[i]) {
+		write(1, &s1[i], 1);
+		i++;
+	}
+	write(1, "\n", 1);
 }
- 0123456789
-"asdsafa addsgdsgfdsgsd dsfhfdh       fdhfdh fdh dfh" " "
