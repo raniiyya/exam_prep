@@ -5,7 +5,7 @@
 static void ft_putstr(char *str, int *count)
 {
     if (!str)
-        s = "(null)";
+        str = "(null)";
     while (*str)
     {
         write(1, str++, 1);
@@ -45,6 +45,33 @@ static void ft_puthex(unsigned int n, int *count)
     (*count)++;
 }
 
+int ft_printf(const char *format, ...)
+{
+    va_list args;
+    int count = 0;
 
+    va_start(args, format);
+    while(*format) {
+        if (*format == '%' && *(format + 1)) {
+            format++;
+            if (*format == 's')
+                ft_putstr(va_arg(args, char *), &count);
+            else if (*format == 'd')
+                ft_putnbr(va_arg(args, int), &count);
+            else if (*format == 'x')
+                ft_puthex(va_arg(args, unsigned int), &count);
+            else {
+                write(1, format, 1);
+                count++;
+            }
+        }
+        else {
+            write(1, format, 1);
+            format++;
+        }
+    }
+    va_end(args);
+    return count;
+}
 
 
