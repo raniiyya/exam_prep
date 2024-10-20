@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 
-static void ft_putstr(char *str, int *count)
+static void ft_putstr(char *str, int *count) //why count is a pointer?
 {
     if (!str)
         str = "(null)";
@@ -52,7 +52,7 @@ int ft_printf(const char *format, ...)
 
     va_start(args, format);
     while(*format) {
-        if (*format == '%' && *(format + 1)) {
+        if (*format == '%' && *(format + 1)) { //why + 1?
             format++;
             if (*format == 's')
                 ft_putstr(va_arg(args, char *), &count);
@@ -66,7 +66,7 @@ int ft_printf(const char *format, ...)
             }
         }
         else {
-            write(1, format, 1);
+            write(1, format, 1); //why we're writing the format?
             format++;
         }
     }
