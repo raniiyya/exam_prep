@@ -1,7 +1,6 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 static void ft_putstr(char *str, int *count) {
     if (!str)
