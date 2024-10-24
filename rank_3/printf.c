@@ -1,29 +1,25 @@
-#include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-static void ft_putstr(char *str, int *count)
-{
+static void ft_putstr(char *str, int *count) {
     if (!str)
         str = "(null)";
-    while (*str)
-    {
+    while (*str) {
         write(1, str++, 1);
         (*count)++;
     }
 }
 
-static void ft_putnbr(int n, int *count)
-{
+static void ft_putnbr(int n, int *count) {
     char c;
 
-    if (n == -2147483648)
-    {
+    if (n == -2147483648) {
         ft_putstr("-2147483648", count);
         return ;
     }
-    if (n < 0)
-    {
+    if (n < 0) {
         write(1, "-", 1);
         (*count)++;
         n = -n;
@@ -35,24 +31,22 @@ static void ft_putnbr(int n, int *count)
     (*count)++;
 }
 
-static void ft_puthex(unsigned int n, int *count)
-{
+static void ft_puthex(unsigned int n, int *count) {
     char *hex = "0123456789abcdef";
 
     if (n >= 16)
         ft_puthex(n / 16, count);
     write(1, &hex[n % 16], 1);
-    (*count)++;
+    (*count)++; 
 }
 
-int ft_printf(const char *format, ...)
-{
+int ft_printf(const char *format, ...) {
     va_list args;
-    int count = 0;
+    int     count = 0;
 
     va_start(args, format);
-    while(*format) {
-        if (*format == '%' && *(format + 1)) {
+    while (*format) {
+        if (*format == '%') {
             format++;
             if (*format == 's')
                 ft_putstr(va_arg(args, char *), &count);
@@ -63,15 +57,14 @@ int ft_printf(const char *format, ...)
             else {
                 write(1, format, 1);
                 count++;
-            }
-        }
+            } 
+            format++;
+        }    
         else {
             write(1, format, 1);
             format++;
-        }
+        }    
     }
     va_end(args);
     return count;
 }
-
-
