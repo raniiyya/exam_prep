@@ -1,7 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include <limits.h>
 
 static void ft_putstr(char *str, int *count) {
     if (!str)
@@ -9,14 +8,16 @@ static void ft_putstr(char *str, int *count) {
     while (*str) {
         write(1, str++, 1);
         (*count)++;
-    }
+    }    
 }
 
 static void ft_putnbr(int n, int *count) {
     char c;
 
-    if (n == -2147483648)
+    if (n == -2147483648) {
         ft_putstr("-2147483648", count);
+        return ;
+    }
     if (n < 0) {
         write(1, "-", 1);
         n = -n;
@@ -40,7 +41,7 @@ static void ft_puthex(unsigned int n, int *count) {
 
 int ft_printf(const char *format, ...) {
     va_list args;
-    int count = 0;
+    int     count = 0;
 
     va_start(args, format);
     while (*format) {
@@ -61,14 +62,10 @@ int ft_printf(const char *format, ...) {
         else {
             write(1, format, 1);
             format++;
+            count++;
         }
     }
     va_end(args);
     return count;
 }
 
-#include <stdio.h>
-
-int main(void) {
-    printf("\n%d", ft_printf("Hexadecimal for %d is %x\n", 42, 42));
-}
