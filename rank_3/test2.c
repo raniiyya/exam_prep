@@ -29,11 +29,11 @@ char    *get_next_line(int fd) {
         if (buffer_pos >= buffer_read) {
             buffer_read = read(fd, buffer, BUFFER_SIZE);
             buffer_pos = 0;
-            if (buffer_read <= 0)
+            if (buffer_pos <= 0)
                 break;
         }
         if (line[i] == '\n')
-            break;
+            break ;
         line[i] = buffer[buffer_pos++];
         i++;
     }
