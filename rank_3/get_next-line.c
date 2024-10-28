@@ -25,20 +25,20 @@ char    *get_next_line(int fd) {
 
     if (fd < 0 || BUFFER_SIZE <= 0) // fd < 0 == means it wasn't opened overall
         return NULL;
-    while (1) {
-        if (buffer_pos >= buffer_read) {
+    while (1) { //indefinite loop until break
+        if (buffer_pos >= buffer_read) { //check if the current pos has reached or exceeded the num of chars read
             buffer_read = read(fd, buffer, BUFFER_SIZE); //read returns the nums it has successfully read
             buffer_pos = 0;
-            if (buffer_read <= 0)
+            if (buffer_read <= 0) //if end of file
                 break ;
         }
-        if (line[i] == '\n')
+        if (line[i] == '\n') //if end of the line
             break ;
-        line[i] = buffer[buffer_pos++];
+        line[i] = buffer[buffer_pos++]; //copies the char from the buffer to the line
         i++;
     }
     line[i] = '\0';
-    if (i == 0)
+    if (i == 0) //if no chars were read into the line
         return NULL;
     return ft_strdup(line);
 }
