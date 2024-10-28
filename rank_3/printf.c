@@ -1,6 +1,6 @@
 #include <unistd.h>
-#include <stdarg.h>
 #include <stdlib.h>
+#include <stdarg.h>
 
 static void ft_putstr(char *str, int *count) {
     if (!str)
@@ -8,7 +8,7 @@ static void ft_putstr(char *str, int *count) {
     while (*str) {
         write(1, str++, 1);
         (*count)++;
-    }
+    }    
 }
 
 static void ft_putnbr(int n, int *count) {
@@ -20,8 +20,8 @@ static void ft_putnbr(int n, int *count) {
     }
     if (n < 0) {
         write(1, "-", 1);
-        (*count)++;
         n = -n;
+        (*count)++;
     }
     if (n > 9)
         ft_putnbr(n / 10, count);
@@ -36,7 +36,7 @@ static void ft_puthex(unsigned int n, int *count) {
     if (n >= 16)
         ft_puthex(n / 16, count);
     write(1, &hex[n % 16], 1);
-    (*count)++; 
+    (*count)++;
 }
 
 int ft_printf(const char *format, ...) {
@@ -56,14 +56,16 @@ int ft_printf(const char *format, ...) {
             else {
                 write(1, format, 1);
                 count++;
-            } 
+            }
             format++;
-        }    
+        }
         else {
             write(1, format, 1);
             format++;
-        }    
+            count++;
+        }
     }
     va_end(args);
     return count;
 }
+
