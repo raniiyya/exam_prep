@@ -17,11 +17,11 @@ char    *ft_strdup(char *src) {
 }
 
 char    *get_next_line(int fd) {
-    char        line[70000];
-    int         i = 0;
-    static char buffer[BUFFER_SIZE];
-    static char buffer_read;
-    static char buffer_pos;
+    char            line[70000];
+    int             i = 0;
+    static char     buffer[BUFFER_SIZE];
+    static int      buffer_read;
+    static int      buffer_pos;
 
     if (fd < 0 || BUFFER_SIZE <= 0)
         return NULL;
