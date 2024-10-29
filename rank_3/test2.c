@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-char    *ft_strdup(char *src) {
+static char     *ft_strdup(char *src) {
     char    *dest;
     int     i = 0;
 
@@ -17,8 +17,8 @@ char    *ft_strdup(char *src) {
 }
 
 char    *get_next_line(int fd) {
-    char            line[70000];
     int             i = 0;
+    char            line[70000];
     static char     buffer[BUFFER_SIZE];
     static int      buffer_read;
     static int      buffer_pos;
@@ -29,8 +29,8 @@ char    *get_next_line(int fd) {
         if (buffer_pos >= buffer_read) {
             buffer_read = read(fd, buffer, BUFFER_SIZE);
             buffer_pos = 0;
-            if (buffer_pos <= 0)
-                break;
+            if (buffer_read <= 0)
+                break ;
         }
         if (line[i] == '\n')
             break ;
